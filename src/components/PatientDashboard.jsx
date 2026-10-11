@@ -10,6 +10,7 @@ import {
 } from './InternalPages.jsx';
 import PatientOrders from './PatientOrders.jsx';
 import MedicationReminders from './MedicationReminders.jsx';
+import NearbyFacilities from './NearbyFacilities.jsx';
 import TriageForm from './TriageForm.jsx';
 import { useLanguage } from '../lib/useLanguage.js';
 
@@ -22,6 +23,7 @@ export default function PatientDashboard({ user, cases, followUps, onAddCase, on
   const pageDescription = {
     Overview: 'A clear, calm place to take your next step.',
     'My care': 'Your complete personal assessment history.',
+    'Nearby facilities': 'Find nearby hospitals, clinics, and public health centres.',
     'Tests & medicines': 'Tests and medicines entered by your doctor.',
     'Medicine reminders': 'Daily reminders for medicines prescribed by your doctor.',
     'Medical history': 'A timeline of your assessments and doctor-entered care.',
@@ -71,6 +73,11 @@ export default function PatientDashboard({ user, cases, followUps, onAddCase, on
             <span><b>{t('Medicine reminders')}</b><small>{t('Set a daily reminder for your prescribed medicines.')}</small></span>
             <span className="shortcut-arrow">→</span>
           </button>
+          <button className="follow-up-shortcut nearby-facilities-shortcut" onClick={() => setActiveNav('Nearby facilities')} type="button">
+            <span className="follow-up-shortcut-icon">⌖</span>
+            <span><b>{t('Find nearby care')}</b><small>{t('Search Google Maps for hospitals, clinics, and public health centres near you.')}</small></span>
+            <span className="shortcut-arrow">→</span>
+          </button>
           <section className="section-block">
             <div className="section-heading"><div><h2>{t('Your recent care')}</h2><p>{t('Only you can see your personal care history in this demo.')}</p></div>{cases.length > 0 && <button className="text-button" onClick={() => setActiveNav('My care')} type="button">{t('View all')} <span>→</span></button>}</div>
             {cases.length === 0 ? (
@@ -93,6 +100,7 @@ export default function PatientDashboard({ user, cases, followUps, onAddCase, on
         </>
       )}
       {activeNav === 'Tests & medicines' && <PatientOrders cases={cases} />}
+      {activeNav === 'Nearby facilities' && <NearbyFacilities />}
       {activeNav === 'Medicine reminders' && <MedicationReminders cases={cases} patientId={user.id} />}
       {activeNav === 'Medical history' && <PatientMedicalHistory cases={cases} />}
       {activeNav === 'My referrals' && <PatientReferrals cases={cases} />}

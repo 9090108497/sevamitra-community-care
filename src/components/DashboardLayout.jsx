@@ -7,6 +7,7 @@ const navigation = {
   patient: [
     ['Overview', '◫'],
     ['My care', '♡'],
+    ['Nearby facilities', '⌖'],
     ['Tests & medicines', '＋'],
     ['Medicine reminders', '◷'],
     ['Medical history', '◷'],
